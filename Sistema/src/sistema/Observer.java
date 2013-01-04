@@ -71,11 +71,10 @@ public class Observer extends UnicastRemoteObject implements ObserverInterface {
     }
 
     @Override
-    public void printjogo(String[] jgs) throws RemoteException {
-        System.out.println("Novo jogo " + jgs[0] + " jogadores: ");
-        for (int i = 1; i < 5; i++) {
-            System.out.println(jgs[i]);
-        }
+    public void printjogo(String jgs) throws RemoteException {
+        System.out.println("Novo jogo " + jgs + " jogadores: ");
+        System.out.println(jgs);
+        
     }
 
     
