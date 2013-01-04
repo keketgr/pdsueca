@@ -1,10 +1,9 @@
+package sistema;
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package sistema;
 import java.rmi.*;
-import java.util.ArrayList;
 /**
  *
  * @author Paulo
