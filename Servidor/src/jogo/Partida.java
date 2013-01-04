@@ -4,6 +4,7 @@
  */
 package jogo;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -25,7 +26,6 @@ public class Partida {
     private int eq2pontos;
     private static Jogo jogo;
     private char Charcimabaixo;
-
 
     synchronized public void setUltimaCarta(Cartas UltimaCarta) {
         this.UltimaCarta = UltimaCarta;
@@ -51,21 +51,35 @@ public class Partida {
     public void darcartas(char cimabiaxo) {//c- da por cima,b-daporbaixo
         baralho = new Baralho();
         baralho.baralha();
-        ArrayList<Cartas> mao = new ArrayList<>();
-        int next = jogo.getAdar();
+        ArrayList<Cartas> mao;
+        // int next = jogo.getAdar();
         if (cimabiaxo == 'c') {
-       
+
             trunfo = baralho.getcarta(0);
             for (int i = 0; i <= 3; i++) {
                 mao = baralho.get10cartas();
-                jogadores.get(i).RecebeCartas(mao, trunfo);
+                try {
+                    jogadores.get(i).RecebeCartas(mao, trunfo);
+                } catch (IOException ex) {
+                    //bvna tratar exceção...user foi se
+                    jogo.Disconect(jogadores.get(i), 1, i);
+                    System.out.println("user " + jogadores.get(i) + "as disconect");
+                    //Logger.getLogger(Partida.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         } else {
-            
+
             trunfo = baralho.getcarta(39);
             for (int i = 3; i >= 0; i--) {
                 mao = baralho.get10cartas();
-                jogadores.get(i).RecebeCartas(mao, trunfo);
+                try {
+                    jogadores.get(i).RecebeCartas(mao, trunfo);
+                } catch (IOException ex) {
+                    //bvna tratar exceção...user foi se
+                    jogo.Disconect(jogadores.get(i), 1, i);
+                    System.out.println("user " + jogadores.get(i) + "as disconect");
+                    //Logger.getLogger(Partida.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         }
         jogo.incrementaAdar();
@@ -75,9 +89,15 @@ public class Partida {
 
     public void NotificaJogadoresCartaJogada(String QuemJogou) {
         for (int i = 0; i < jogadores.size(); i++) {
-            jogadores.get(i).RecebeCarta(UltimaCarta, QuemJogou);
+            try {
+                jogadores.get(i).RecebeCarta(UltimaCarta, QuemJogou);
+            } catch (IOException ex) {
+                //bvna tratar exceção...user foi se
+                jogo.Disconect(jogadores.get(i), 1, i);
+                System.out.println("user " + jogadores.get(i) + "as disconect");
+                //Logger.getLogger(Partida.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
-
     }
 
     synchronized public int joga() {
@@ -90,7 +110,7 @@ public class Partida {
         System.out.println("Cima ou baixo Implementar Baixo");
         darCartasCimaBaixo();//pergunta ao user "adar"
         //2º dar cartas
-       
+
         String msg = "<" + jogadores.get(jogo.getAdar()).getNickname() + "> Deu cartas por ";
         if (Charcimabaixo == 'c') {
             msg += "cima";
@@ -123,7 +143,7 @@ public class Partida {
 
             int p = jogada.contapontos();
 
-            System.out.println("|||||Primeiro a jogar:"+first+"||indice: " + v + " pontos: " + p);
+            System.out.println("|||||Primeiro a jogar:" + first + "||indice: " + v + " pontos: " + p);
             if (v == 0 || v == 2) {
                 if (eq1pontos == -1) {
                     eq1pontos++;
@@ -137,7 +157,7 @@ public class Partida {
                 eq2pontos += p;
             }
             first = v;
-            
+
             System.out.println("espera 3 sec");
             try {
                 wait(3000);
@@ -146,7 +166,7 @@ public class Partida {
             }
             System.out.println("3 sec mais tarde");
             NotificaLogJogo("<" + jogadores.get(first).getNickname() + "> ganhou a vaza");
-            
+
             mandaRecolherCartas();
         }//acaba a partida
 
@@ -174,7 +194,14 @@ public class Partida {
     }
 
     synchronized public void darCartasCimaBaixo() {
-        jogadores.get(jogo.getAdar()).CimaBaixo();
+        try {
+            jogadores.get(jogo.getAdar()).CimaBaixo();
+        } catch (IOException ex) {
+            //bvna tratar exceção...user foi se
+            jogo.Disconect(jogadores.get(jogo.getAdar()), 1, jogo.getAdar());
+            System.out.println("user " + jogadores.get(jogo.getAdar()) + "as disconect");
+            //Logger.getLogger(Partida.class.getName()).log(Level.SEVERE, null, ex);
+        }
         try {
             wait();
         } catch (InterruptedException ex) {
@@ -185,7 +212,14 @@ public class Partida {
 
     synchronized void NotificaQuemJoga(String nick) {
         for (int i = 0; i < jogadores.size(); i++) {
-            jogadores.get(i).jogoQuemJoga(nick);
+            try {
+                jogadores.get(i).jogoQuemJoga(nick);
+            } catch (IOException ex) {
+                //bvna tratar exceção...user foi se
+                jogo.Disconect(jogadores.get(i), 1, i);
+                System.out.println("user " + jogadores.get(i) + "as disconect");
+                //Logger.getLogger(Partida.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         try {
             wait();
@@ -196,13 +230,27 @@ public class Partida {
 
     public void NotificaLogJogo(String msg) {
         for (int i = 0; i < jogadores.size(); i++) {
-            jogadores.get(i).MensagemSobreJogo(msg);
+            try {
+                jogadores.get(i).MensagemSobreJogo(msg);
+            } catch (IOException ex) {
+                //bvna tratar exceção...user foi se
+                jogo.Disconect(jogadores.get(i), 1, i);
+                System.out.println("user " + jogadores.get(i) + "as disconect");
+                //Logger.getLogger(Partida.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
 
     private void mandaRecolherCartas() {
         for (int i = 0; i < jogadores.size(); i++) {
-            jogadores.get(i).RecolheCartas();
+            try {
+                jogadores.get(i).RecolheCartas();
+            } catch (IOException ex) {
+                //bvna tratar exceção...user foi se
+                jogo.Disconect(jogadores.get(i), 1, i);
+                System.out.println("user " + jogadores.get(i) + "as disconect");
+                //Logger.getLogger(Partida.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
 }

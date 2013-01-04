@@ -1,6 +1,5 @@
 package servidor;
 
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -9,8 +8,6 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.*;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import jogo.*;
 
 public class Servidor implements Runnable {
@@ -126,10 +123,11 @@ public class Servidor implements Runnable {
     }
 
     public void UpdateSala() {
+
         Buffer buf = new Buffer();
         buf.setFlag(3);
         buf.setUsersSala(GetUsersSala());
-
+        verificaJogos();
         String[][] idgamejoga;
 
 
@@ -343,7 +341,6 @@ public class Servidor implements Runnable {
         try {
             ObjectInputStream restore = new ObjectInputStream(new FileInputStream("FileUsers.sav"));
             while (lista.add((User) restore.readObject())) {
-                System.out.println("1");
             }
 
             restore.close();
@@ -359,6 +356,10 @@ public class Servidor implements Runnable {
     private void UserLogOut(String utilizador) {
         for (int i = 0; i < usersLogad.size(); i++) {
             if (usersLogad.get(i).getNickname().compareTo(utilizador) == 0) {
+                Jogo j = getJogoOf(utilizador);
+                if (j != null) {
+                    j.Disconect(GetUserbyNick(utilizador), 1, -1);
+                }
                 //usersLogad.get(i).closeSock();
                 usersLogad.remove(i);
                 MensagemSystema(("User " + utilizador + " Saiu da sala\n"), 2, utilizador);
@@ -567,5 +568,12 @@ public class Servidor implements Runnable {
         }
         return null;
     }
-}
 
+    private void verificaJogos() {
+        for (int i = 0; i < jogos.size(); i++) {
+            if (!jogos.get(i).isAlive() && jogos.get(i).getjogadores().isEmpty()) {
+                jogos.remove(i);
+            }
+        }
+    }
+}

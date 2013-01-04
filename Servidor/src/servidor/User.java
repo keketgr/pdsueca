@@ -52,10 +52,6 @@ public class User implements Serializable {
         this.out = out;
     }
 
-    public Socket getS() {
-        return s;
-    }
-
     public void setS(Socket s) {
         this.s = s;
     }
@@ -115,65 +111,110 @@ public class User implements Serializable {
             Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    /* 
+     * ========================================================================
+     * ============================ Decorrer do Jogo ==========================
+     * ========================================================================
+     */
 
-    public void IniciaJogo(ArrayList<String> jogadores,String host) {
-
+    public void IniciaJogo(ArrayList<String> jogadores) throws IOException {
+        if (out == null) {
+            out = new ObjectOutputStream(s.getOutputStream());
+        }
         Buffer buf = new Buffer();
         buf.setFlag(9);
         buf.setSubflag(1);
         buf.setUsersAceites(jogadores);
-        buf.setUtilizador(host);
         this.estado = ESTADO_JOGO;
-        try {
-            if (out != null) {
-
-                out.writeObject(buf);
-                out.flush();
-            }
-        } catch (IOException ex) {
-            Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        out.writeObject(buf);
+        out.flush();
     }
 
-    public void RecebeCarta(Cartas carta, String proximoUser) {
+    public void RecebeCarta(Cartas carta, String proximoUser) throws IOException {
         Buffer buf = new Buffer();
         buf.setCartajogada(carta);
         buf.setUtilizador(proximoUser);
         buf.setFlag(9);
         buf.setSubflag(5);
-        try {
-            if (out == null) {
-                out = new ObjectOutputStream(s.getOutputStream());
-            }
-            out.writeObject(buf);
-            out.flush();
-        } catch (IOException ex) {
-            Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
+        out.writeObject(buf);
+        out.flush();
 
     }
 
-    public void RecebeCartas(ArrayList<Cartas> mao, Cartas trunf) {
+    public void RecebeCartas(ArrayList<Cartas> mao, Cartas trunf) throws IOException {
         Buffer buf = new Buffer();
         buf.setCartasmao(mao);
         buf.setTrunfo(trunf);
         System.out.println("<" + nickname + ">mao: " + mao);
         buf.setFlag(9);
         buf.setSubflag(3);
-        try {
-            out.writeObject(buf);
-            out.flush();
-        } catch (IOException ex) {
-            Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        out.writeObject(buf);
+        out.flush();
+
     }
 
+    public void jogoQuemJoga(String nickname) throws IOException {
+        Buffer buff = new Buffer();
+        buff.setFlag(9);
+        buff.setSubflag(4);
+        buff.setUtilizador(nickname);
+        out.writeObject(buff);
+        out.flush();
+
+    }
+
+    public void CimaBaixo() throws IOException {
+        Buffer buff = new Buffer();
+        buff.setFlag(9);
+        buff.setSubflag(2);
+        buff.setUtilizador(nickname);
+        out.writeObject(buff);
+        out.flush();
+    }
+
+    public void RecolheCartas() throws IOException {
+        Buffer buff = new Buffer();
+        buff.setFlag(9);
+        buff.setSubflag(6);
+        out.writeObject(buff);
+        out.flush();
+    }
+
+    public void MensagemSobreJogo(String msg) throws IOException {
+        Buffer buff = new Buffer();
+        buff.setFlag(9);
+        buff.setSubflag(7);
+        buff.setMensagem(msg);
+        out.writeObject(buff);
+        out.flush();
+
+    }
+
+    public void jogoFimJogo(String msgUsersVitoriosos) throws IOException {
+
+        Buffer buff = new Buffer();
+        buff.setFlag(9);
+        buff.setSubflag(10);
+        buff.setMensagem(msgUsersVitoriosos);
+
+        out.writeObject(buff);
+        out.flush();
+
+    }
+
+    public void notificavencedor(int sf) throws IOException {
+        Buffer buff = new Buffer();
+        buff.setFlag(9);
+        buff.setSubflag(sf);
+        out.writeObject(buff);
+        out.flush();
+    }
     /* 
      * ========================================================================
      * ================================ MENSAGENS =============================
      * ========================================================================
      */
+
     public void EnviaMensagem(String msg, int flag) {
         Buffer buff = new Buffer();
         try {
@@ -269,6 +310,11 @@ public class User implements Serializable {
         }
     }
 
+    /* 
+     * ========================================================================
+     * ================================ PRÉ JOGO ==============================
+     * ========================================================================
+     */
     void createJoinGame() {
         Buffer buff = new Buffer();
         try {
@@ -293,67 +339,13 @@ public class User implements Serializable {
         }
     }
 
-    public void jogoQuemJoga(String nickname) {
-        Buffer buff = new Buffer();
-        buff.setFlag(9);
-        buff.setSubflag(4);
-        buff.setUtilizador(nickname);
-        try {
-            out.writeObject(buff);
-            out.flush();
-        } catch (IOException ex) {
-            Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
-    public void CimaBaixo() {
-        Buffer buff = new Buffer();
-        buff.setFlag(9);
-        buff.setSubflag(2);
-        buff.setUtilizador(nickname);
-        try {
-            out.writeObject(buff);
-            out.flush();
-        } catch (IOException ex) {
-            Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
-    public void RecolheCartas() {
-        Buffer buff = new Buffer();
-        buff.setFlag(9);
-        buff.setSubflag(6);
-        try {
-            out.writeObject(buff);
-            out.flush();
-        } catch (IOException ex) {
-            Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
-    public void MensagemSobreJogo(String msg) {
-        Buffer buff = new Buffer();
-        buff.setFlag(9);
-        buff.setSubflag(7);
-        buff.setMensagem(msg);
-        try {
-            out.writeObject(buff);
-            out.flush();
-        } catch (IOException ex) {
-            Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
-    public void notificavencedor(int sf) {
-        Buffer buff = new Buffer();
-        buff.setFlag(9);
-        buff.setSubflag(sf);
-        //buff.setMensagem(msg);
-        try {
-            out.writeObject(buff);
-            out.flush();
-        } catch (IOException ex) {
-            Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, ex);
-        }
+    /* 
+     * ========================================================================
+     * ================================ OVERRIDE ==============================
+     * ========================================================================
+     */
+    @Override
+    public String toString() {
+        return nickname;
     }
 }
