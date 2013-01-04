@@ -10,9 +10,8 @@ import java.util.ArrayList;
 /**
  * @author Paulo
  */
-public interface ServerInterface extends ObserverInterface{
+public interface ServerInterface {
     public void addObserver(ObserverInterface obs) throws RemoteException;
     public ArrayList<String> getjogadores() throws RemoteException;
     public ArrayList<String> getjogos() throws RemoteException;
-    
 }
