@@ -19,7 +19,7 @@ class MulticastServer extends Thread
     {
         
         s= new MulticastSocket(6001);
-        InetAddress group=InetAddress.getByName("225.0.0.1");
+        InetAddress group=InetAddress.getByName("255.1.1.1");
         s.joinGroup(group);
         serverAddr=InetAddress.getByName("127.0.0.1");
         this.port=port;
