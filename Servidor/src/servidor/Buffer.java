@@ -24,9 +24,18 @@ public class Buffer implements Serializable {
     String mensagem;
     String pass;
     String utilizador;//para whisp , invite,login
+    int pontos;
 
     public String[][] getGameIdJogadores() {
         return gameIdJogadores;
+    }
+
+    public int getPontos() {
+        return pontos;
+    }
+
+    public void setPontos(int pontos) {
+        this.pontos = pontos;
     }
 
     public void setGameIdJogadores(String[][] gameIdJogadores) {

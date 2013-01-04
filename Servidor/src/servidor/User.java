@@ -202,9 +202,10 @@ public class User implements Serializable {
 
     }
 
-    public void notificavencedor(int sf) throws IOException {
+    public void notificavencedor(int sf,int pontos) throws IOException {
         Buffer buff = new Buffer();
         buff.setFlag(9);
+        buff.setPontos(pontos);
         buff.setSubflag(sf);
         out.writeObject(buff);
         out.flush();
