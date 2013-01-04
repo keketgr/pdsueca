@@ -82,7 +82,7 @@ public class Jogo extends Thread {
     public void run() {
         for (int i = 0; i < jogadores.size(); i++) {
             jogadores.get(i).setEstado(User.ESTADO_JOGO);
-            jogadores.get(i).IniciaJogo(getStringjogadores());
+            jogadores.get(i).IniciaJogo(getStringjogadores(),id);
         }
         max = 5;
         int vencedor = 0;

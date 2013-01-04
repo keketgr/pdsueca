@@ -116,12 +116,13 @@ public class User implements Serializable {
         }
     }
 
-    public void IniciaJogo(ArrayList<String> jogadores) {
+    public void IniciaJogo(ArrayList<String> jogadores,String host) {
 
         Buffer buf = new Buffer();
         buf.setFlag(9);
         buf.setSubflag(1);
         buf.setUsersAceites(jogadores);
+        buf.setUtilizador(host);
         this.estado = ESTADO_JOGO;
         try {
             if (out != null) {
