@@ -32,7 +32,7 @@ public class Observer extends UnicastRemoteObject implements ObserverInterface {
     public static void main(String[] args) {
         
         if (args.length > 0) {
-            String url = "rmi://" + args[0] + "/servico";
+            String url = "rmi://" + args[0] + "/Serverservice";
             try {
                 servico= (ServerInterface) Naming.lookup(url);
                 
