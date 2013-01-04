@@ -51,6 +51,8 @@ public class Pontuacao extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         PontosEquipa2 = new javax.swing.JPanel();
+        jLPontos1 = new javax.swing.JLabel();
+        jLPontos2 = new javax.swing.JLabel();
 
         javax.swing.GroupLayout PontosEquipa1Layout = new javax.swing.GroupLayout(PontosEquipa1);
         PontosEquipa1.setLayout(PontosEquipa1Layout);
@@ -82,6 +84,12 @@ public class Pontuacao extends javax.swing.JPanel {
             .addGap(0, 45, Short.MAX_VALUE)
         );
 
+        jLPontos1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLPontos1.setText("0");
+
+        jLPontos2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLPontos2.setText("0");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -89,20 +97,32 @@ public class Pontuacao extends javax.swing.JPanel {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 199, Short.MAX_VALUE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(PontosEquipa1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(PontosEquipa2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(PontosEquipa2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLPontos2, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(111, 111, 111))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLPontos1, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(103, 103, 103)))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(jLabel1)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jLPontos1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(PontosEquipa1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel2)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jLPontos2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(PontosEquipa2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -125,6 +145,8 @@ public class Pontuacao extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel PontosEquipa1;
     private javax.swing.JPanel PontosEquipa2;
+    private javax.swing.JLabel jLPontos1;
+    private javax.swing.JLabel jLPontos2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel2;
@@ -133,12 +155,14 @@ public class Pontuacao extends javax.swing.JPanel {
     public void addPont(int eq, int n) {
         if (eq == 1) {
             pontos1 += n;
-            Pontua1();
+            //Pontua1();
         }
         if (eq == 2) {
             pontos2 += n;
-            Pontua2();
+            //Pontua2();
         }
+        jLPontos1.setText("" + pontos1);
+        jLPontos2.setText("" + pontos2);
     }
 
     @Override
@@ -146,14 +170,14 @@ public class Pontuacao extends javax.swing.JPanel {
         super.repaint();
 
     }
-@Override
-public void paintComponent(Graphics g) {
-    super.paintComponent(g);
-    Pontua1();
-    Pontua2();
-}
-    
-    
+
+    @Override
+    public void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        Pontua1();
+        Pontua2();
+    }
+
     public void Pontua1() {
         if (g1 == null) {
             g1 = PontosEquipa1.getGraphics();
@@ -169,6 +193,7 @@ public void paintComponent(Graphics g) {
         if (pontos1 % 5 == 0) {
             espacamento1 += 4;
         }
+        PontosEquipa1.paint(g1);
     }
 
     public void Pontua2() {
@@ -179,12 +204,12 @@ public void paintComponent(Graphics g) {
             if (pontos2 % 5 != 0) {
                 g2.drawLine(5 + espacamento2 + pontos2 * 5 + i, 4, 5 + espacamento2 + pontos2 * 5 + i, 4 + ALTURA);
             } else {
-
                 g2.drawLine((5 + espacamento2 + (pontos2 + 1) * 5) - 6 * 5 + i, 4 + ALTURA, 5 + espacamento2 + pontos2 * 5 + i, 4);
             }
         }
         if (pontos2 % 5 == 0) {
             espacamento2 += 4;
         }
+        PontosEquipa2.paint(g2);
     }
 }
