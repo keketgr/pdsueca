@@ -1,5 +1,6 @@
 package servidor;
 
+import Jinterface.Serverservice;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -7,7 +8,14 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.*;
+import java.rmi.AlreadyBoundException;
+import java.rmi.Naming;
+import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import jogo.*;
 
 public class Servidor implements Runnable {
@@ -20,14 +28,15 @@ public class Servidor implements Runnable {
     static int njogos;
     static ArrayList<Invites> invites;
     static ArrayList<PreJogo> prejogos;
+    static Serverservice servico = null;
 
     /**
      * @param args the command line arguments
      */
     public Servidor(Socket s) {
-
         this.socketaux = s;
         buffer = new Buffer();
+
 
     }
 
@@ -206,6 +215,7 @@ public class Servidor implements Runnable {
                                 GetUserbyNick(user).setOut(out);
                                 usersLogad.add(GetUserbyNick(user));
                                 MensagemSystema((user + " entrou na sala\n"), 2, user);
+                                servico.printjogador(user);
 
                             } else {
                                 buffer.setFlag(-1);
@@ -275,6 +285,19 @@ public class Servidor implements Runnable {
         }
     }
 
+    public static void criaObserver() {
+        try {
+            servico = new Serverservice(new Servidor(null));
+            LocateRegistry.createRegistry(Registry.REGISTRY_PORT);
+            System.out.println(InetAddress.getLocalHost().getHostAddress());
+            Naming.bind("rmi://" + InetAddress.getLocalHost().getHostAddress() + "/servico", servico);
+        } catch (RemoteException | UnknownHostException ex) {
+            Logger.getLogger(Servidor.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (AlreadyBoundException ea) {
+        } catch (MalformedURLException em) {
+        }
+    }
+
     public static void main(String[] args) throws SocketException, InterruptedException {
         ServerSocket ss = null;
         njogos = 100;
@@ -289,6 +312,7 @@ public class Servidor implements Runnable {
         prejogos = new ArrayList<>();
         usersRegist = LoadUsers();
 
+        criaObserver();
         try {
 
             ss = new ServerSocket(PortoEscuta);
@@ -514,6 +538,11 @@ public class Servidor implements Runnable {
                     UpdateSala();
                     j.start();
                     prejogos.remove(pre);
+                    try {
+                        servico.printjogo(j.toString());
+                    } catch (RemoteException ex) {
+                        Logger.getLogger(Servidor.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 }
                 break;
             case 5://mudar de equipa
