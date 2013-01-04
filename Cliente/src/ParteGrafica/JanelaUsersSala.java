@@ -39,12 +39,16 @@ public class JanelaUsersSala extends JInternalFrame {
     }
 
     public void PrivateChat(String user) {
-        fChatRoom.addChatPrivado(user);
+        if (comunica.getUser().compareTo(user) != 0) {
+            fChatRoom.addChatPrivado(user);
+        }
     }
-    public void Invite(String user){
-        comunica.Invite(user);
-        fChatRoom.invite(user);
-        //System.out.println("Invite player "+user);
+
+    public void Invite(String user) {
+        if (comunica.getUser().compareTo(user) != 0) {
+            comunica.Invite(user);
+            fChatRoom.invite(user);
+        }
     }
 
     public void setUserssala(String[] Userssala) {
@@ -98,9 +102,10 @@ public class JanelaUsersSala extends JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-public String getSelectedUser(){
-    return ListUsersSala.getSelectedValue().toString();
-}
+
+    public String getSelectedUser() {
+        return ListUsersSala.getSelectedValue().toString();
+    }
     private void ListUsersSalaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ListUsersSalaMouseClicked
         if (evt.getButton() == evt.BUTTON3) {//evento do mause 2
             int index = ListUsersSala.locationToIndex(evt.getPoint());

@@ -47,6 +47,7 @@ public class PopUpMenu extends JPopupMenu {
     }
 
     public void actionPerformedPM(ActionEvent e) {
+       
         comunica.PrivateChat(comunica.getSelectedUser());
         //System.out.println("popupmenoPM");
 
