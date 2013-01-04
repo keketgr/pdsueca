@@ -100,6 +100,22 @@ public class Partida {
         }
     }
 
+    public int getEq1pontos() {
+        return eq1pontos;
+    }
+
+    public void setEq1pontos(int eq1pontos) {
+        this.eq1pontos = eq1pontos;
+    }
+
+    public int getEq2pontos() {
+        return eq2pontos;
+    }
+
+    public void setEq2pontos(int eq2pontos) {
+        this.eq2pontos = eq2pontos;
+    }
+
     synchronized public int joga() {
         int vencedor = -1;
         int actual;

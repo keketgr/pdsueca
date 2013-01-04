@@ -102,14 +102,15 @@ public class Jogo extends Thread {
             partida = new Partida(this);
             partida.NotificaLogJogo("\njogo " + (i + 1) + " de " + max + "\n");
             vencedor = partida.joga();
+            partida.NotificaLogJogo("\nEquipa 1: " + partida.getEq1pontos() + "\nEquipa 2: " + partida.getEq2pontos());
             if (vencedor == 1) {
                 partida.NotificaLogJogo("Vencedores da Partida: <" + jogadores.get(0) + "> & <" + jogadores.get(2) + ">\n");
                 score[0]++;
-                NotificaVencedorPartida(1,partida.valorvitoria());
+                NotificaVencedorPartida(1, partida.valorvitoria());
             } else {
                 partida.NotificaLogJogo("\nVencedores da Partida: <" + jogadores.get(1) + "> & <" + jogadores.get(3) + ">\n");
                 score[1]++;
-                NotificaVencedorPartida(2,partida.valorvitoria());
+                NotificaVencedorPartida(2, partida.valorvitoria());
             }
             partida.NotificaLogJogo("Pontuação:\n<" + jogadores.get(0) + ">&<"
                     + jogadores.get(2) + ">:" + score[0] + "\n<" + jogadores.get(1)
@@ -141,7 +142,7 @@ public class Jogo extends Thread {
         return jogadores.contains(u);
     }
 
-    private void NotificaVencedorPartida(int v,int pontos) {
+    private void NotificaVencedorPartida(int v, int pontos) {
         int sf;
         if (v == 1) {
             sf = 8;
@@ -150,7 +151,7 @@ public class Jogo extends Thread {
         }
         for (int i = 0; i < jogadores.size(); i++) {
             try {
-                jogadores.get(i).notificavencedor(sf,pontos);
+                jogadores.get(i).notificavencedor(sf, pontos);
                 System.out.println("notifica vencedor a: " + jogadores.get(i));
             } catch (IOException ex) {
                 //bvna tratar exceção...user foi se
