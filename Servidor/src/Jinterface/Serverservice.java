@@ -15,7 +15,7 @@ import servidor.Servidor;
  */
 public class Serverservice extends UnicastRemoteObject implements ServerInterface{
     protected ObserverInterface observer;
-    protected Servidor server;
+    protected static Servidor server;
     public Serverservice(Servidor s)throws RemoteException {
         server=s;
     }

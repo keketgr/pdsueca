@@ -4,7 +4,6 @@
  */
 package Jinterface;
 import java.rmi.*;
-import java.util.ArrayList;
 /**
  *
  * @author Paulo
