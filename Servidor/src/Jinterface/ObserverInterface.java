@@ -11,5 +11,5 @@ import java.util.ArrayList;
  */
 public interface ObserverInterface extends Remote{
     public void printjogador(String jog) throws RemoteException;
-    public void printjogo(String[] jgs) throws RemoteException;
+    public void printjogo(String jgs) throws RemoteException;
 }

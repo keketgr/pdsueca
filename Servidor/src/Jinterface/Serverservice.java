@@ -40,7 +40,7 @@ public class Serverservice extends UnicastRemoteObject implements ServerInterfac
     }
 
     @Override
-    public void printjogo(String[] jgs) throws RemoteException {
+    public void printjogo(String jgs) throws RemoteException {
         observer.printjogo(jgs);
     }    
 }
