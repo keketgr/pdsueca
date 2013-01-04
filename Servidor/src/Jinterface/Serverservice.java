@@ -34,12 +34,10 @@ public class Serverservice extends UnicastRemoteObject implements ServerInterfac
         return server.getJogos();
     }
 
-    @Override
     public void printjogador(String jog) throws RemoteException {
         observer.printjogador(jog);
     }
 
-    @Override
     public void printjogo(String jgs) throws RemoteException {
         observer.printjogo(jgs);
     }    
