@@ -51,6 +51,7 @@ public class Observer extends UnicastRemoteObject implements ObserverInterface {
         Scanner sc = new Scanner(System.in);
         String in = "";
         while (in != "sair") {
+            System.out.print("\nCmd:>");
             in = sc.next();
             if (in.equals("jogadores")) {
                 try {
@@ -64,6 +65,11 @@ public class Observer extends UnicastRemoteObject implements ObserverInterface {
                 } catch (RemoteException ex) {
                     Logger.getLogger(Observer.class.getName()).log(Level.SEVERE, null, ex);
                 }
+            }else if(in.equals("help")){
+                System.out.println("<jogadores> mostra todos os jogadores na sala\n"
+                        + "<jogos> mostra todos os jogos criados com os as pontuações e useres no jogo");
+            }else{
+                 System.out.println("\nComando incorrecto... escreva help pra ver os comandos");
             }
 
         }
