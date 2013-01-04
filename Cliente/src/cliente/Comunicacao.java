@@ -151,7 +151,7 @@ public class Comunicacao extends Thread {
 
             MulticastSocket soc = new MulticastSocket(6001);
             soc.setSoTimeout(1000);
-            InetAddress group = InetAddress.getByName("225.0.0.1");
+            InetAddress group = InetAddress.getByName("255.1.1.1");
             soc.joinGroup(group);
             byte[] buf = new byte[256];
             String msg = "IP";
