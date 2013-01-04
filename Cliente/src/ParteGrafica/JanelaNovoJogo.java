@@ -5,6 +5,7 @@
 package ParteGrafica;
 
 import FormsPrincipais.FormChatRoom;
+import java.awt.Container;
 import java.awt.Dimension;
 import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
@@ -50,29 +51,36 @@ public class JanelaNovoJogo extends JInternalFrame {
     public void showfInicio() {
 
         setContentPane(fInicio);
-        this.setSize(fInicio.getPreferredSize());
+        //this.setSize(fInicio.getPreferredSize());
         centrarJanela();
         this.setTitle("Lista de Jogos");
         fInicio.setVisible(true);
+        this.show();
         setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
     }
 
     public void showfListaEspera() {
-        this.setSize(fListaEspera.getPreferredSize());
-        centrarJanela();
-        this.setTitle("Novo Jogo");
+        //this.setSize(fListaEspera.getPreferredSize());
         setContentPane(fListaEspera);
-        fInicio.setVisible(true);
+        this.setTitle("Novo Jogo");        
+        centrarJanela();
+        fListaEspera.setVisible(true);
         this.show();
         setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
     }
 
+    @Override
+    public void setContentPane(Container c) {
+        this.setSize(c.getSize());
+        super.setContentPane(c);
+    }
+
     public void showfInvite() {
-        this.setSize(fInvite.getPreferredSize());
+        //this.setSize(fInvite.getPreferredSize());
         centrarJanela();
         this.setTitle("Jogadores Convidados");
         setContentPane(fInvite);
-        fInicio.setVisible(true);
+        fInvite.setVisible(true);
         this.show();
         setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 

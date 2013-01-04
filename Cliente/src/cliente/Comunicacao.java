@@ -304,37 +304,29 @@ public class Comunicacao extends Thread {
                             break;
                         case 5:
                             break;
-                        case 6://iniciar jogo
-
-                            //Update(buffer);
-                            break;
-
                         case 10://recebe Whisp
                             grafico.getchatRoom().ChatPrivado(buffer.getMensagem(), buffer.getUtilizador());
                             break;
                         case 11://recebe invite
                             trataInvite(buffer.getUtilizador(), buffer.getSubflag());
                             break;
-                        case 12:
-
-                            break;
                         case 13://recebe vencedor
-                            grafico.getfMesa().recolheVaza();
-                            System.out.println("o vencedor da vazada  foi " + buffer.getProxjogar());
-                            grafico.getfMesa().getLbdir().setForeground(Color.black);
-                            grafico.getfMesa().getLbesq().setForeground(Color.black);
-                            grafico.getfMesa().getLbcima().setForeground(Color.black);
-                            grafico.getfMesa().getLbbaixo().setForeground(Color.black);
-
-                            if (grafico.getfMesa().getLbesq().getText() == null ? buffer.getProxjogar() == null : grafico.getfMesa().getLbesq().getText().equals(buffer.getProxjogar())) {
-                                grafico.getfMesa().getLbesq().setForeground(Color.blue);
-                            }
-                            if (grafico.getfMesa().getLbcima().getText() == null ? buffer.getProxjogar() == null : grafico.getfMesa().getLbcima().getText().equals(buffer.getProxjogar())) {
-                                grafico.getfMesa().getLbcima().setForeground(Color.blue);
-                            }
-                            if (grafico.getfMesa().getLbdir().getText().equals(buffer.getProxjogar())) {
-                                grafico.getfMesa().getLbdir().setForeground(Color.blue);
-                            }
+//                            grafico.getfMesa().recolheVaza();
+//                            System.out.println("o vencedor da vazada  foi " + buffer.getProxjogar());
+//                            grafico.getfMesa().getLbdir().setForeground(Color.black);
+//                            grafico.getfMesa().getLbesq().setForeground(Color.black);
+//                            grafico.getfMesa().getLbcima().setForeground(Color.black);
+//                            grafico.getfMesa().getLbbaixo().setForeground(Color.black);
+//
+//                            if (grafico.getfMesa().getLbesq().getText() == null ? buffer.getProxjogar() == null : grafico.getfMesa().getLbesq().getText().equals(buffer.getProxjogar())) {
+//                                grafico.getfMesa().getLbesq().setForeground(Color.blue);
+//                            }
+//                            if (grafico.getfMesa().getLbcima().getText() == null ? buffer.getProxjogar() == null : grafico.getfMesa().getLbcima().getText().equals(buffer.getProxjogar())) {
+//                                grafico.getfMesa().getLbcima().setForeground(Color.blue);
+//                            }
+//                            if (grafico.getfMesa().getLbdir().getText().equals(buffer.getProxjogar())) {
+//                                grafico.getfMesa().getLbdir().setForeground(Color.blue);
+//                            }
                             break;
                         case 14://jogo cancelado ou acabado
                             estado = ESTADO_SALA;
@@ -632,6 +624,7 @@ public class Comunicacao extends Thread {
     private void trataJogo(Buffer buff) {//flag 9
         switch (buff.getSubflag()) {
             case 1:
+                idJogo = buff.getUtilizador();
                 UsersNoJogo = buffer.getUsersAceites();
                 grafico.getfMesa().colocaJogadores();
                 grafico.showfMesa();
@@ -667,7 +660,7 @@ public class Comunicacao extends Thread {
                 //mostra mensagem com equipa vencedora
                 grafico.showfChatRoom();
                 this.estado = ESTADO_SALA;
-                JOptionPane.showMessageDialog(grafico,buff.getMensagem() , "Fim de Jogo", JOptionPane.OK_OPTION, null);
+                JOptionPane.showMessageDialog(grafico, buff.getMensagem(), "Fim de Jogo", JOptionPane.OK_OPTION, null);
                 break;
 
         }

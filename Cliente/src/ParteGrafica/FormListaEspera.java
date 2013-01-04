@@ -42,12 +42,12 @@ public class FormListaEspera extends javax.swing.JPanel {
 
     @Override
     public void setVisible(boolean aFlag) {
-        super.setVisible(aFlag);
         if (popup.getChatRoom().getGrafico().getComunicacao().getUser().compareTo(popup.getChatRoom().getGrafico().getComunicacao().getIdJogo()) == 0) {
             btnStart.setVisible(true);
         } else {
             btnStart.setVisible(false);
         }
+        super.setVisible(aFlag);
     }
 
     public FormListaEspera(JanelaNovoJogo popup) {
