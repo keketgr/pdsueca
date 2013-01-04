@@ -310,24 +310,6 @@ public class Comunicacao extends Thread {
                         case 11://recebe invite
                             trataInvite(buffer.getUtilizador(), buffer.getSubflag());
                             break;
-                        case 13://recebe vencedor
-//                            grafico.getfMesa().recolheVaza();
-//                            System.out.println("o vencedor da vazada  foi " + buffer.getProxjogar());
-//                            grafico.getfMesa().getLbdir().setForeground(Color.black);
-//                            grafico.getfMesa().getLbesq().setForeground(Color.black);
-//                            grafico.getfMesa().getLbcima().setForeground(Color.black);
-//                            grafico.getfMesa().getLbbaixo().setForeground(Color.black);
-//
-//                            if (grafico.getfMesa().getLbesq().getText() == null ? buffer.getProxjogar() == null : grafico.getfMesa().getLbesq().getText().equals(buffer.getProxjogar())) {
-//                                grafico.getfMesa().getLbesq().setForeground(Color.blue);
-//                            }
-//                            if (grafico.getfMesa().getLbcima().getText() == null ? buffer.getProxjogar() == null : grafico.getfMesa().getLbcima().getText().equals(buffer.getProxjogar())) {
-//                                grafico.getfMesa().getLbcima().setForeground(Color.blue);
-//                            }
-//                            if (grafico.getfMesa().getLbdir().getText().equals(buffer.getProxjogar())) {
-//                                grafico.getfMesa().getLbdir().setForeground(Color.blue);
-//                            }
-                            break;
                         case 14://jogo cancelado ou acabado
                             estado = ESTADO_SALA;
                             grafico.getChatRoom().getfPopup().showfInicio();
@@ -623,7 +605,7 @@ public class Comunicacao extends Thread {
 
     private void trataJogo(Buffer buff) {//flag 9
         switch (buff.getSubflag()) {
-            case 1:
+            case 1://comecar jogo
                 idJogo = buff.getUtilizador();
                 UsersNoJogo = buffer.getUsersAceites();
                 grafico.getfMesa().colocaJogadores();
@@ -650,11 +632,13 @@ public class Comunicacao extends Thread {
                 grafico.getfMesa().putLog(buff.getMensagem() + "\n");
                 System.out.println("<Jogo>: " + buff.getMensagem());
                 break;
-            case 8://recebe vitoria equipa 1
-                grafico.getfMesa().getPontuacao1().Pontua1();
+            case 8://recebe vitoria equipa 1                
+                grafico.getfMesa().getPontuacao1().addPont(1, buff.getPontos());
+                System.out.println("vitoria equipa 1 com " + buff.getPontos() + " pontos");
                 break;
             case 9://recebe vitoria equipa 2
-                grafico.getfMesa().getPontuacao1().Pontua2();
+                grafico.getfMesa().getPontuacao1().addPont(2, buff.getPontos());
+                System.out.println("vitoria equipa 2 com " + buff.getPontos() + " pontos");
                 break;
             case 10://Fim de jogo
                 //mostra mensagem com equipa vencedora

@@ -130,23 +130,34 @@ public class Pontuacao extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel2;
     // End of variables declaration//GEN-END:variables
 
-    public void addPont(int eq,int n){
-        if(eq==1){
-            pontos1+=n;
+    public void addPont(int eq, int n) {
+        if (eq == 1) {
+            pontos1 += n;
             Pontua1();
         }
-        if(eq==2){
-            pontos2+=n;
+        if (eq == 2) {
+            pontos2 += n;
             Pontua2();
         }
-    
-    
     }
+
+    @Override
+    public void repaint() {
+        super.repaint();
+
+    }
+@Override
+public void paintComponent(Graphics g) {
+    super.paintComponent(g);
+    Pontua1();
+    Pontua2();
+}
+    
+    
     public void Pontua1() {
         if (g1 == null) {
             g1 = PontosEquipa1.getGraphics();
         }
-        pontos1++;
         for (int i = 0; i < ESPESSURA; i++) {
             if (pontos1 % 5 != 0) {
                 g1.drawLine(5 + espacamento1 + pontos1 * 5 + i, 4, 5 + espacamento1 + pontos1 * 5 + i, 4 + ALTURA);
@@ -164,7 +175,6 @@ public class Pontuacao extends javax.swing.JPanel {
         if (g2 == null) {
             g2 = PontosEquipa2.getGraphics();
         }
-        pontos2++;
         for (int i = 0; i < ESPESSURA; i++) {
             if (pontos2 % 5 != 0) {
                 g2.drawLine(5 + espacamento2 + pontos2 * 5 + i, 4, 5 + espacamento2 + pontos2 * 5 + i, 4 + ALTURA);

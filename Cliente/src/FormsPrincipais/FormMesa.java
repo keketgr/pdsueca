@@ -43,8 +43,8 @@ public class FormMesa extends javax.swing.JPanel {
     private int m_interval;  // Milliseconds between updates.
     private static Timer m_timerCima, m_timerBaixo, m_timerEsq, m_timerDir;// Timer fires to anmimate one step
     private boolean vezJogar;
-    private int LowplayCard = 0;
-    private int HighplayCard = 10;
+    private int LowplayCard;
+    private int HighplayCard;
     private ArrayList<Cartas> CartasMao;
     private Cartas trunfo;
     private int posicaoNoJogo;
@@ -70,10 +70,9 @@ public class FormMesa extends javax.swing.JPanel {
         trunfo = null;
         usersinGame = new ArrayList<>();
         PrimeiraCarta = null;
-
-        //pra remover apos testes
         vezJogar = false;
-        //iniciaCartas();
+        LowplayCard = 0;
+        HighplayCard = 10;
     }
 
     public Pontuacao getPontuacao1() {
@@ -754,11 +753,12 @@ public class FormMesa extends javax.swing.JPanel {
     public void iniciaCartas(ArrayList cartas, Cartas trunfo) {
         CartasMao = cartas;
         this.trunfo = trunfo;
-        PrimeiraCarta=null;
+        PrimeiraCarta = null;
         DrawCards();
         Drawtrunfo(trunfo);
-        //jPmao.setEnabled(false);
-
+        this.repaint();
+        LowplayCard = 0;
+        HighplayCard = 10;
     }
 
     public void vezJogar(String utilizador) {
