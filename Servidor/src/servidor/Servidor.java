@@ -388,6 +388,22 @@ public class Servidor implements Runnable {
                 if (j != null) {
                     j.Disconect(GetUserbyNick(utilizador), 1, -1);
                 }
+                PreJogo pj = getPreJogoOf(GetUserbyNick(utilizador));
+                if (pj != null) {
+                    if (pj.sair(GetUserbyNick(utilizador))) {
+                        prejogos.remove(pj);
+                    }
+                }
+                Invites inv = getInviteof(GetUserbyNick(utilizador));
+                if (inv != null) {
+                    if (inv.isHost(GetUserbyNick(utilizador))) {
+                        inv.Cancelar();
+                        invites.remove(inv);
+                    } else {
+                        inv.removeUserAceites(GetUserbyNick(utilizador));
+                        inv.recusou(GetUserbyNick(utilizador));
+                    }
+                }
                 //usersLogad.get(i).closeSock();
                 usersLogad.remove(i);
                 MensagemSystema(("User " + utilizador + " Saiu da sala\n"), 2, utilizador);
