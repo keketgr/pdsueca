@@ -190,7 +190,7 @@ public class Jogo extends Thread {
         String out = "";
         out += "\nJogo criado por: " + id;
         out += "\n\tEquipa1: " + score[0] + " vitorias. Elementos:<" + jogadores.get(0) + "> & <" + jogadores.get(2)+">";
-        out += "\n\tEquipa2: " + score[1] + " vitorias. Elementos:<" + jogadores.get(1) + "> & <" + jogadores.get(3)+">";
+        out += "\n\tEquipa2: " + score[1] + " vitorias. Elementos:<" + jogadores.get(1) + "> & <" + jogadores.get(3)+">\n";
         return out;
     }
 

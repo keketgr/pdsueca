@@ -29,6 +29,7 @@ public class Servidor implements Runnable {
     static ArrayList<Invites> invites;
     static ArrayList<PreJogo> prejogos;
     static Serverservice servico = null;
+    static Registry r;
 
     /**
      * @param args the command line arguments
@@ -232,6 +233,7 @@ public class Servidor implements Runnable {
                                 buffer.setFlag(1);
                                 MensagemSystema((user + " entrou na sala\n"), 2, user);
                                 SaveUsers();
+                                servico.printjogador(user);
                             } else {
                                 buffer.setFlag(-1);
                             }
@@ -288,14 +290,16 @@ public class Servidor implements Runnable {
     public static void criaObserver() {
         try {
             servico = new Serverservice(new Servidor(null));
-            LocateRegistry.createRegistry(Registry.REGISTRY_PORT);
+            r = LocateRegistry.createRegistry(Registry.REGISTRY_PORT);
             System.out.println(InetAddress.getLocalHost().getHostAddress());
-            Naming.bind("rmi://" + InetAddress.getLocalHost().getHostAddress() + "/Serverservice", servico);
+            Naming.bind("rmi://localhost/ServerInterface", servico);
+            //r.bind("servico", servico);
         } catch (RemoteException | UnknownHostException ex) {
             Logger.getLogger(Servidor.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (AlreadyBoundException ea) {
-        } catch (MalformedURLException em) {
+        } catch (AlreadyBoundException e) {
+        } catch (MalformedURLException e) {
         }
+
     }
 
     public static void main(String[] args) throws SocketException, InterruptedException {

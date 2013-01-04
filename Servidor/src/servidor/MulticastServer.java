@@ -19,7 +19,7 @@ class MulticastServer extends Thread
     {
         
         s= new MulticastSocket(6001);
-        InetAddress group=InetAddress.getByName("255.1.1.1");
+        InetAddress group=InetAddress.getByName("225.1.1.1");
         s.joinGroup(group);
         serverAddr=InetAddress.getByName("127.0.0.1");
         this.port=port;
@@ -44,7 +44,7 @@ class MulticastServer extends Thread
 //        }
         try {
             
-            pkt=new DatagramPacket(msg.getBytes(),msg.length(),InetAddress.getByName("225.0.0.1"),6001);
+            pkt=new DatagramPacket(msg.getBytes(),msg.length(),InetAddress.getByName("225.1.1.1"),6001);
         } catch (UnknownHostException ex) {
             Logger.getLogger(MulticastServer.class.getName()).log(Level.SEVERE, null, ex);
         }
