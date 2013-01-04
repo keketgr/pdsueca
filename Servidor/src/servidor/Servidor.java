@@ -290,7 +290,7 @@ public class Servidor implements Runnable {
             servico = new Serverservice(new Servidor(null));
             LocateRegistry.createRegistry(Registry.REGISTRY_PORT);
             System.out.println(InetAddress.getLocalHost().getHostAddress());
-            Naming.bind("rmi://" + InetAddress.getLocalHost().getHostAddress() + "/servico", servico);
+            Naming.bind("rmi://" + InetAddress.getLocalHost().getHostAddress() + "/Serverservice", servico);
         } catch (RemoteException | UnknownHostException ex) {
             Logger.getLogger(Servidor.class.getName()).log(Level.SEVERE, null, ex);
         } catch (AlreadyBoundException ea) {
