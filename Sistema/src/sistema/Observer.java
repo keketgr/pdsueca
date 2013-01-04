@@ -71,18 +71,19 @@ public class Observer extends UnicastRemoteObject implements ObserverInterface {
             }else{
                  System.out.println("\nComando incorrecto... escreva help pra ver os comandos");
             }
-
         }
     }
 
     @Override
     public void printjogador(String jog) throws RemoteException {
         System.out.println("Jogador " + jog + " conectou-se..");
+        System.out.print("\nCmd:>");
     }
 
     @Override
     public void printjogo(String jgs) throws RemoteException {
         System.out.println(jgs );
+        System.out.print("\nCmd:>");
     }
 
     public static void getjogadores() throws RemoteException {
