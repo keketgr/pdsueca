@@ -19,6 +19,18 @@ public class FormListaEspera extends javax.swing.JPanel {
     JanelaNovoJogo popup;
     ArrayList<String> Equipa1, Equipa2;
 
+    public FormListaEspera(JanelaNovoJogo popup) {
+        this.popup = popup;
+        Equipa1 = new ArrayList<>();
+        Equipa2 = new ArrayList<>();
+        Dimension size = new Dimension(325, 200);
+        setSize(size);
+        setPreferredSize(size);
+        setMaximumSize(size);
+        initComponents();
+        btnStart.setVisible(false);
+    }
+
     public void updateJogadores(ArrayList<String> Equipa1, ArrayList<String> Equipa2) {
         this.Equipa1 = Equipa1;
         this.Equipa2 = Equipa2;
@@ -48,17 +60,6 @@ public class FormListaEspera extends javax.swing.JPanel {
             btnStart.setVisible(false);
         }
         super.setVisible(aFlag);
-    }
-
-    public FormListaEspera(JanelaNovoJogo popup) {
-        this.popup = popup;
-        Equipa1 = new ArrayList<>();
-        Equipa2 = new ArrayList<>();
-        Dimension size = new Dimension(325, 200);
-        setSize(size);
-        setPreferredSize(size);
-        initComponents();
-        btnStart.setVisible(false);
     }
 
     public JanelaNovoJogo getPopup() {

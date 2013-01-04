@@ -71,7 +71,7 @@ public class JanelaNovoJogo extends JInternalFrame {
 
     @Override
     public void setContentPane(Container c) {
-        this.setSize(c.getSize());
+        this.setSize(c.getPreferredSize());
         super.setContentPane(c);
     }
 
