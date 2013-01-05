@@ -2,10 +2,10 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package servidor;
+//package servidor;
 
 import java.util.ArrayList;
-import jogo.Jogo;
+//import jogo.Jogo;
 
 /**
  *

@@ -1,4 +1,4 @@
-package Jinterface;
+//package Jinterface;
 
 
 /*
@@ -8,8 +8,8 @@ package Jinterface;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
-import servidor.Servidor;
-import sistema.ObserverInterface;
+//import servidor.Servidor;
+//import sistema.ObserverInterface;
 
 /**
  *

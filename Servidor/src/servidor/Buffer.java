@@ -1,8 +1,8 @@
-package servidor;
+//package servidor;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import jogo.Cartas;
+//import jogo.Cartas;
 
 public class Buffer implements Serializable {
 

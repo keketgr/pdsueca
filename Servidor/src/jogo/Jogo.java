@@ -2,11 +2,11 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package jogo;
+//package jogo;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import servidor.User;
+//import servidor.User;
 
 public class Jogo extends Thread {
 

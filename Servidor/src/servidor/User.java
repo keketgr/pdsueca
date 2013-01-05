@@ -1,4 +1,4 @@
-package servidor;
+//package servidor;
 
 import java.io.IOException;
 import java.io.ObjectOutputStream;
@@ -7,7 +7,7 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import jogo.Cartas;
+//import jogo.Cartas;
 
 public class User implements Serializable {
 

@@ -1,4 +1,4 @@
-package Jinterface;
+//package Jinterface;
 
 /*
  * To change this template, choose Tools | Templates
@@ -8,7 +8,7 @@ package Jinterface;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
-import sistema.ObserverInterface;
+//import sistema.ObserverInterface;
 
 /**
  * @author Paulo

@@ -1,6 +1,6 @@
-package servidor;
+//package servidor;
 
-import Jinterface.Serverservice;
+//import Jinterface.Serverservice;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -16,7 +16,7 @@ import java.rmi.registry.Registry;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import jogo.*;
+//import jogo.*;
 
 public class Servidor implements Runnable {
 
