@@ -1,4 +1,4 @@
-package sistema;
+//package sistema;
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import Jinterface.ServerInterface;
+//import Jinterface.ServerInterface;
 
 /**
  *
@@ -31,7 +31,7 @@ public class Observer extends UnicastRemoteObject implements ObserverInterface {
     public static void main(String[] args) {
 
         if (args.length > 0) {
-            String url ="rmi://localhost/ServerInterface";
+            String url = "rmi://localhost/ServerInterface";
             System.out.println(args[0]);
             try {
                 servico = (ServerInterface) Naming.lookup(url);
@@ -59,18 +59,27 @@ public class Observer extends UnicastRemoteObject implements ObserverInterface {
                 } catch (RemoteException ex) {
                     Logger.getLogger(Observer.class.getName()).log(Level.SEVERE, null, ex);
                 }
-            } else if (in.equals("jogos")) {
+                continue;
+            }
+            if (in.equals("jogos")) {
                 try {
                     getjogos();
                 } catch (RemoteException ex) {
                     Logger.getLogger(Observer.class.getName()).log(Level.SEVERE, null, ex);
                 }
-            }else if(in.equals("help")){
-                System.out.println("<jogadores> mostra todos os jogadores na sala\n"
-                        + "<jogos> mostra todos os jogos criados com os as pontuações e useres no jogo");
-            }else{
-                 System.out.println("\nComando incorrecto... escreva help pra ver os comandos");
+                continue;
             }
+            if (in.equals("help")) {
+                System.out.println("<jogadores> mostra todos os jogadores na sala\n"
+                        + "<jogos> mostra todos os jogos criados com os as pontuações e useres no jogo\n"
+                        + "<sair> sai do programa");
+                continue;
+            }
+            if (in.equals("sair")) {
+                return;
+            }
+            System.out.println("\nComando incorrecto... escreva help pra ver os comandos");
+
         }
     }
 
@@ -82,7 +91,7 @@ public class Observer extends UnicastRemoteObject implements ObserverInterface {
 
     @Override
     public void printjogo(String jgs) throws RemoteException {
-        System.out.println(jgs );
+        System.out.println(jgs);
         System.out.print("\nCmd:>");
     }
 
