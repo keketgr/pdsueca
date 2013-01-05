@@ -1,12 +1,5 @@
-package ParteGrafica;
+//package ParteGrafica;
 
-import FormsPrincipais.FormChatRoom;
-import FormsPrincipais.FormLogin;
-import FormsPrincipais.FormMesa;
-import FormsPrincipais.JanelaAcerca;
-import FormsPrincipais.JanelaOpcoes;
-import cliente.Comunicacao;
-import cliente.Opcoes;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.io.FileInputStream;

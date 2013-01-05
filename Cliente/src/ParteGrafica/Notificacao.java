@@ -2,9 +2,8 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package ParteGrafica;
+//package ParteGrafica;
 
-import FormsPrincipais.FormChatRoom;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.GridLayout;

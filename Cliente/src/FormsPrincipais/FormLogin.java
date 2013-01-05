@@ -2,10 +2,8 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package FormsPrincipais;
+//package FormsPrincipais;
 
-import ParteGrafica.JanelaPrincipal;
-import ParteGrafica.Pontuacao;
 import java.awt.Color;
 
 /**

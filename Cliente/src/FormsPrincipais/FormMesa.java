@@ -2,13 +2,8 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package FormsPrincipais;
+//package FormsPrincipais;
 
-import ParteGrafica.JanelaPrincipal;
-import ParteGrafica.Pontuacao;
-import cliente.Getlink;
-import cliente.ImagePanel;
-import cliente.VerticalLabelUI;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
@@ -21,12 +16,10 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.Timer;
-import javax.swing.border.Border;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.Style;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
-import jogo.Cartas;
 
 /**
  *
@@ -115,7 +108,7 @@ public class FormMesa extends javax.swing.JPanel {
         TextP_lgJogo = new javax.swing.JTextPane();
         jLabel1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
-        pontuacao1 = new ParteGrafica.Pontuacao();
+        pontuacao1 = new Pontuacao();
 
         jToggleButton1.setText("jToggleButton1");
 
@@ -355,7 +348,7 @@ public class FormMesa extends javax.swing.JPanel {
     private javax.swing.JLabel lbcima;
     private javax.swing.JLabel lbdir;
     private javax.swing.JLabel lbesq;
-    private ParteGrafica.Pontuacao pontuacao1;
+    private Pontuacao pontuacao1;
     // End of variables declaration//GEN-END:variables
 
     public void colocaJogadores() {

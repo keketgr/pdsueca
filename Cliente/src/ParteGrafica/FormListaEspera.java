@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package ParteGrafica;
+//package ParteGrafica;
 
 import java.awt.Dimension;
 import java.util.ArrayList;
@@ -236,7 +236,7 @@ public class FormListaEspera extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStartActionPerformed
-        popup.getChatRoom().getGrafico().getComunicacao().ComeçarJogo();
+        popup.getChatRoom().getGrafico().getComunicacao().ComecarJogo();
     }//GEN-LAST:event_btnStartActionPerformed
 
     private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed

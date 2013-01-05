@@ -2,15 +2,8 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package FormsPrincipais;
+//package FormsPrincipais;
 
-import ParteGrafica.JanelaChatGlobal;
-import ParteGrafica.JanelaChatPrivado;
-import ParteGrafica.JanelaNovoJogo;
-import ParteGrafica.JanelaPrincipal;
-import ParteGrafica.JanelaUsersSala;
-import ParteGrafica.Notificacao;
-import cliente.Comunicacao;
 import java.awt.Dimension;
 import java.util.ArrayList;
 import javax.swing.JDesktopPane;
