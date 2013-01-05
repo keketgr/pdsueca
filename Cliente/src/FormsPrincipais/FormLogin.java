@@ -192,6 +192,7 @@ public class FormLogin extends javax.swing.JPanel {
         }
         if (jCBremember.isSelected()) {
             grafico.getOp().addUser(TB_username.getText(), TB_password.getText());
+            grafico.guardaOpcoes();
         }
 
 
@@ -232,6 +233,7 @@ public class FormLogin extends javax.swing.JPanel {
         }
         if (jCBremember.isSelected()) {
             grafico.getOp().addUser(TB_username.getText(), TB_password.getText());
+            grafico.guardaOpcoes();            
         }
     }//GEN-LAST:event_btnLoginActionPerformed
     private void TB_usernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TB_usernameActionPerformed
